@@ -1,5 +1,8 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import ScrollDownButton from "../components/ScrollDownButton";
+import AnimatedElement from "../components/AnimatedElement";
+import AnimatedSection from "../components/AnimatedSection";
 
 export default function Home() {
   return (
@@ -64,107 +67,114 @@ export default function Home() {
           </div>
         </div>
 
-        <a href="#services" className="scroll-down" onClick={(e) => {
-          e.preventDefault();
-          document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-        }}>
-          <span className="scroll-down-text">Scroll Down</span>
-          <div className="scroll-down-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </div>
-        </a>
+        <ScrollDownButton targetId="services" />
       </section>
 
-      <div className={styles.instructorsText}>Over 120+ Instructors</div>
+      <AnimatedElement animation="scale" delay={0.3}>
+        <div className={styles.instructorsText}>Over 120+ Instructors</div>
+      </AnimatedElement>
 
-      <section className={styles.servicesSection} id="services">
+      <AnimatedSection id="services" className={styles.servicesSection} animation="up">
         <div className="container">
-          <h2 className={styles.sectionTitle}>Our<br />Services</h2>
+          <AnimatedElement animation="fade" delay={0.2}>
+            <h2 className={styles.sectionTitle}>Our<br />Services</h2>
+          </AnimatedElement>
 
           <div className={styles.servicesGrid}>
-            <div className={styles.serviceItem}>
-              <div className={styles.serviceIcon}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                </svg>
+            <AnimatedElement animation="left" delay={0.4}>
+              <div className={styles.serviceItem}>
+                <div className={styles.serviceIcon}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </div>
+                <div className={styles.serviceContent}>
+                  <h3 className={styles.serviceTitle}>GENERATION HUB</h3>
+                  <p className={styles.serviceDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet.</p>
+                </div>
               </div>
-              <div className={styles.serviceContent}>
-                <h3 className={styles.serviceTitle}>GENERATION HUB</h3>
-                <p className={styles.serviceDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet.</p>
-              </div>
-            </div>
+            </AnimatedElement>
 
-            <div className={styles.serviceItem}>
-              <div className={styles.serviceIcon}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
+            <AnimatedElement animation="right" delay={0.6}>
+              <div className={styles.serviceItem}>
+                <div className={styles.serviceIcon}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                <div className={styles.serviceContent}>
+                  <h3 className={styles.serviceTitle}>GRADING SYSTEM</h3>
+                  <p className={styles.serviceDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet.</p>
+                </div>
               </div>
-              <div className={styles.serviceContent}>
-                <h3 className={styles.serviceTitle}>GRADING SYSTEM</h3>
-                <p className={styles.serviceDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet.</p>
-              </div>
-            </div>
+            </AnimatedElement>
           </div>
 
-          <div className={styles.statsGrid}>
-            <div className={styles.statItem}>
-              <div className="stat-value">120</div>
-              <div className="stat-label">courses</div>
+          <AnimatedElement animation="up" delay={0.8}>
+            <div className={styles.statsGrid}>
+              <div className={styles.statItem}>
+                <div className="stat-value">120</div>
+                <div className="stat-label">courses</div>
+              </div>
+              <div className={styles.statItem}>
+                <div className="stat-value">285</div>
+                <div className="stat-label">happy users</div>
+              </div>
+              <div className={styles.statItem}>
+                <div className="stat-value">10</div>
+                <div className="stat-label">countries</div>
+              </div>
             </div>
-            <div className={styles.statItem}>
-              <div className="stat-value">285</div>
-              <div className="stat-label">happy users</div>
-            </div>
-            <div className={styles.statItem}>
-              <div className="stat-value">10</div>
-              <div className="stat-label">countries</div>
-            </div>
-          </div>
+          </AnimatedElement>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className={styles.testimonialSection}>
+      <AnimatedSection className={styles.testimonialSection} animation="fade">
         <div className="container">
-          <h2 className={styles.sectionTitle}>Testimonials</h2>
+          <AnimatedElement animation="up" delay={0.2}>
+            <h2 className={styles.sectionTitle}>Testimonials</h2>
+          </AnimatedElement>
 
           <div className={styles.testimonialGrid}>
-            <div className={styles.testimonialCard}>
-              <div className={styles.testimonialHeader}>
-                <div className={styles.testimonialAvatar}></div>
-                <div className={styles.testimonialAuthor}>
-                  <div className={styles.testimonialName}>Josh Broline</div>
-                  <div className={styles.testimonialRole}>English Teacher</div>
+            <AnimatedElement animation="left" delay={0.4}>
+              <div className={styles.testimonialCard}>
+                <div className={styles.testimonialHeader}>
+                  <div className={styles.testimonialAvatar}></div>
+                  <div className={styles.testimonialAuthor}>
+                    <div className={styles.testimonialName}>Josh Broline</div>
+                    <div className={styles.testimonialRole}>English Teacher</div>
+                  </div>
                 </div>
+                <p className={styles.testimonialContent}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                </p>
               </div>
-              <p className={styles.testimonialContent}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
+            </AnimatedElement>
 
-            <div className={styles.testimonialCard}>
-              <div className={styles.testimonialHeader}>
-                <div className={styles.testimonialAvatar}></div>
-                <div className={styles.testimonialAuthor}>
-                  <div className={styles.testimonialName}>Mike Portnoy</div>
-                  <div className={styles.testimonialRole}>Science Teacher</div>
+            <AnimatedElement animation="right" delay={0.6}>
+              <div className={styles.testimonialCard}>
+                <div className={styles.testimonialHeader}>
+                  <div className={styles.testimonialAvatar}></div>
+                  <div className={styles.testimonialAuthor}>
+                    <div className={styles.testimonialName}>Mike Portnoy</div>
+                    <div className={styles.testimonialRole}>Science Teacher</div>
+                  </div>
                 </div>
+                <p className={styles.testimonialContent}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci.
+                </p>
               </div>
-              <p className={styles.testimonialContent}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci.
-              </p>
-            </div>
+            </AnimatedElement>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <footer className={styles.footer}>
+      <AnimatedSection className={styles.footer} animation="up">
         <div className="container">
-          <div className={styles.footerContent}>
+          <AnimatedElement animation="fade" delay={0.2}>
+            <div className={styles.footerContent}>
             <div className={styles.footerColumn}>
               <div className={styles.footerLogo}>Teacherly</div>
               <p className={styles.footerAbout}>
@@ -242,8 +252,9 @@ export default function Home() {
               <a href="#" className={styles.footerBottomLink}>Security</a>
             </div>
           </div>
+          </AnimatedElement>
         </div>
-      </footer>
+      </AnimatedSection>
     </div>
   );
 }
