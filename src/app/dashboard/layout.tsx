@@ -12,27 +12,27 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   // Check if viewport is mobile on initial load and when window resizes
   useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    // Check on initial load
-    checkIfMobile();
-
     // Set sidebar collapsed by default on mobile
     if (window.innerWidth <= 768) {
       setSidebarCollapsed(true);
     }
 
+    // Function to handle window resize
+    const handleResize = () => {
+      // Auto-collapse sidebar on mobile devices
+      if (window.innerWidth <= 768) {
+        setSidebarCollapsed(true);
+      }
+    };
+
     // Add event listener for window resize
-    window.addEventListener('resize', checkIfMobile);
+    window.addEventListener('resize', handleResize);
 
     // Cleanup event listener
-    return () => window.removeEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const toggleSidebar = () => {
