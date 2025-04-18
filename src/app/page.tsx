@@ -7,8 +7,8 @@ export default function Home() {
       <header className={styles.header}>
         <div className={styles.logo}>Teacherly</div>
         <div className={styles.signIn}>
-          <span>Sign in</span> |
-          <button className={styles.ctaButton}>Join</button>
+          <a href="/auth" className={styles.signInLink}>Sign in</a> |
+          <a href="/auth" className={styles.ctaButton}>Join</a>
         </div>
       </header>
 
