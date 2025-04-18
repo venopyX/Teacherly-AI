@@ -28,6 +28,12 @@
   100% { transform: translateY(0px); }
 }
 
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
 @keyframes glow {
   0% { box-shadow: 0 0 5px var(--primary-glow); }
   50% { box-shadow: 0 0 20px var(--primary-glow); }
@@ -137,6 +143,11 @@ button {
   animation: pulse 2s infinite ease-in-out;
 }
 
+.hero-btn {
+  width: auto;
+  max-width: 180px;
+}
+
 .btn-primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 200, 150, 0.5);
@@ -174,4 +185,49 @@ button {
 
 .statItem:hover .stat-label {
   color: var(--foreground);
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.scroll-down-text {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.scroll-down-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gradient-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 200, 150, 0.3);
+  animation: bounce 2s infinite;
+  transition: all 0.3s ease;
+}
+
+.scroll-down:hover .scroll-down-text {
+  color: var(--foreground);
+}
+
+.scroll-down:hover .scroll-down-arrow {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 200, 150, 0.5);
 }

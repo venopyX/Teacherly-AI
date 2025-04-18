@@ -12,7 +12,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section className={styles.heroSection}>
+      <section className={styles.heroSection} id="hero">
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>
             Hello, Welcome<br />
@@ -24,7 +24,7 @@ export default function Home() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
           </p>
           <div>
-            <a href="/auth?mode=signup" className="btn btn-primary">
+            <a href="/auth?mode=signup" className="btn btn-primary hero-btn">
               Start
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -63,11 +63,23 @@ export default function Home() {
             <div className="stat-label">countries</div>
           </div>
         </div>
+
+        <a href="#services" className="scroll-down" onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+        }}>
+          <span className="scroll-down-text">Scroll Down</span>
+          <div className="scroll-down-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </a>
       </section>
 
       <div className={styles.instructorsText}>Over 120+ Instructors</div>
 
-      <section className={styles.servicesSection}>
+      <section className={styles.servicesSection} id="services">
         <div className="container">
           <h2 className={styles.sectionTitle}>Our<br />Services</h2>
 
