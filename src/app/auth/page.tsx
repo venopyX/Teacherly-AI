@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import styles from "./auth.module.css";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Auth() {
+// Component that uses useSearchParams
+function AuthContent() {
   const searchParams = useSearchParams();
   const mode = searchParams.get('mode');
 
@@ -177,5 +178,15 @@ export default function Auth() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Main Auth component with Suspense boundary
+export default function Auth() {
+
+  return (
+    <Suspense fallback={<div className={styles.authContainer}><div className={styles.formContainer}>Loading...</div></div>}>
+      <AuthContent />
+    </Suspense>
   );
 }
