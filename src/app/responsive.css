@@ -1,0 +1,12 @@
+/* Responsive global styles */
+@media (max-width: 992px) {
+  body {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+}

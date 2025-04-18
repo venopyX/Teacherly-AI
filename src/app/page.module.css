@@ -688,10 +688,6 @@
 }
 
 @media (max-width: 992px) {
-  body {
-    padding: 1rem;
-  }
-
   .header {
     padding: 1rem;
   }
@@ -777,10 +773,6 @@
 }
 
 @media (max-width: 480px) {
-  body {
-    padding: 0.5rem;
-  }
-
   .heroTitle {
     font-size: 2.5rem;
   }
