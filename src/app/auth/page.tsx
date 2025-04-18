@@ -3,15 +3,27 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./auth.module.css";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Auth() {
-  const [isLogin, setIsLogin] = useState(true);
+  const searchParams = useSearchParams();
+  const mode = searchParams.get('mode');
+
+  const [isLogin, setIsLogin] = useState(mode !== 'signup');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [isAnimating, setIsAnimating] = useState(false);
   const router = useRouter();
+
+  // Set initial mode based on URL parameter
+  useEffect(() => {
+    if (mode === 'signup') {
+      setIsLogin(false);
+    } else {
+      setIsLogin(true);
+    }
+  }, [mode]);
 
   // Toggle between login and signup
   const toggleMode = () => {
@@ -25,12 +37,12 @@ export default function Auth() {
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Here you would typically handle authentication
     // For now, we'll just simulate a successful login/signup
     console.log(isLogin ? "Logging in..." : "Signing up...");
     console.log({ email, password, name });
-    
+
     // Redirect to home page after successful login/signup
     router.push("/");
   };
@@ -40,20 +52,20 @@ export default function Auth() {
       <div className={styles.authBackground}>
         <div className={styles.glowEffect}></div>
       </div>
-      
+
       <Link href="/" className={styles.logo}>
         Teacherly
       </Link>
-      
+
       <div className={styles.formContainer}>
         <div className={`${styles.formCard} ${isAnimating ? styles.animating : ""}`}>
           <h1 className={styles.title}>{isLogin ? "Welcome Back" : "Create Account"}</h1>
           <p className={styles.subtitle}>
-            {isLogin 
-              ? "Enter your credentials to access your account" 
+            {isLogin
+              ? "Enter your credentials to access your account"
               : "Fill in the form to create your account"}
           </p>
-          
+
           <form onSubmit={handleSubmit} className={styles.form}>
             {!isLogin && (
               <div className={styles.inputGroup}>
@@ -76,7 +88,7 @@ export default function Auth() {
                 </div>
               </div>
             )}
-            
+
             <div className={styles.inputGroup}>
               <label htmlFor="email">Email Address</label>
               <div className={styles.inputWrapper}>
@@ -96,7 +108,7 @@ export default function Auth() {
                 />
               </div>
             </div>
-            
+
             <div className={styles.inputGroup}>
               <div className={styles.labelRow}>
                 <label htmlFor="password">Password</label>
@@ -123,7 +135,7 @@ export default function Auth() {
                 />
               </div>
             </div>
-            
+
             <button type="submit" className={styles.submitButton}>
               {isLogin ? "Sign In" : "Create Account"}
               <span className={styles.buttonIcon}>
@@ -134,11 +146,11 @@ export default function Auth() {
               </span>
             </button>
           </form>
-          
+
           <div className={styles.divider}>
             <span>OR</span>
           </div>
-          
+
           <div className={styles.socialLogin}>
             <button className={styles.socialButton}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -153,7 +165,7 @@ export default function Auth() {
               <span>Continue with GitHub</span>
             </button>
           </div>
-          
+
           <div className={styles.toggleMode}>
             <p>
               {isLogin ? "Don't have an account?" : "Already have an account?"}

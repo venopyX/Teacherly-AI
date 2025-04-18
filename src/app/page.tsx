@@ -7,8 +7,8 @@ export default function Home() {
       <header className={styles.header}>
         <div className={styles.logo}>Teacherly</div>
         <div className={styles.signIn}>
-          <a href="/auth" className={styles.signInLink}>Sign in</a> |
-          <a href="/auth" className={styles.ctaButton}>Join</a>
+          <a href="/auth?mode=login" className={styles.signInLink}>Sign in</a> |
+          <a href="/auth?mode=signup" className={styles.ctaButton}>Join</a>
         </div>
       </header>
 
@@ -24,13 +24,13 @@ export default function Home() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
           </p>
           <div>
-            <button className="btn btn-primary">
+            <a href="/auth?mode=signup" className="btn btn-primary">
               Start
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
-            </button>
+            </a>
           </div>
         </div>
 
