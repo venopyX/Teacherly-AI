@@ -168,7 +168,7 @@ export default function Auth() {
 
           <div className={styles.toggleMode}>
             <p>
-              {isLogin ? "Don't have an account?" : "Already have an account?"}
+              {isLogin ? "Don&apos;t have an account?" : "Already have an account?"}
               <button type="button" onClick={toggleMode} className={styles.toggleButton}>
                 {isLogin ? "Sign Up" : "Sign In"}
               </button>
