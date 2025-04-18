@@ -16,7 +16,7 @@ export default function Dashboard() {
     <div className={`${isLoaded ? styles.fadeIn : ''}`}>
       <header className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>Dashboard</h1>
-        <p>Welcome back, Teacher! Here's an overview of your teaching tools and resources.</p>
+        <p>Welcome back, Teacher! Here&apos;s an overview of your teaching tools and resources.</p>
       </header>
 
       <div className={styles.cardsGrid}>
