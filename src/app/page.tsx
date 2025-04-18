@@ -6,15 +6,6 @@ export default function Home() {
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logo}>Teacherly</div>
-        <div className={styles.searchContainer}>
-          <span className={styles.searchIcon}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </span>
-          <input type="text" placeholder="Search courses..." className={styles.searchInput} />
-        </div>
         <div className={styles.signIn}>
           <span>Sign in</span> |
           <button className={styles.ctaButton}>Join</button>
@@ -47,7 +38,7 @@ export default function Home() {
           <Image
             src="/teacher.jpeg"
             alt="Teacher working on computer"
-            width={400}
+            width={500}
             height={500}
             style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
             priority
