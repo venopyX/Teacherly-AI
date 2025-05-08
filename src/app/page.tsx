@@ -39,7 +39,7 @@ export default function Home() {
 
         <div className={styles.heroImage}>
           <Image
-            src="/teacher.jpeg"
+            src="/teacher.png"
             alt="Teacher working on computer"
             width={500}
             height={500}
