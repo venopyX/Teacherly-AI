@@ -8,22 +8,22 @@ export default function HeroSection() {
     <section className={styles.heroSection} id="hero">
       <div className={styles.heroContent}>
         <h1 className={styles.heroTitle}>
-          Hello, Welcome
+          Transform Your
           <br />
-          To AI Powered
+          Teaching With
           <br />
-          Teaching
+          <span className="text-gradient">AI-Powered</span>
           <br />
-          Toolkit
+          Tools
         </h1>
         <p className={styles.heroText}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam
-          nonummy nibhed euismod tincidunt ut laoreet dolore magna aliquam erat
-          volutpat.
+          Create engaging lessons, grade assignments faster, and deliver personalized
+          learning experiences with our AI teaching assistant that works 24/7
+          to support your educational goals.
         </p>
-        <div>
+        <div className="flex gap-4">
           <a href="/auth?mode=signup" className="btn btn-primary hero-btn">
-            Start
+            Get Started
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -39,35 +39,44 @@ export default function HeroSection() {
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </a>
+          <a href="/about" className="btn btn-secondary hero-btn">
+            Learn More
+          </a>
         </div>
       </div>
 
       <div className={styles.heroImage}>
+        <div className="glow-effect"></div>
         <Image
           src="/teacher.png"
-          alt="Teacher working on computer"
+          alt="Teacher working with AI teaching assistant"
           width={500}
           height={500}
-          style={{ objectFit: "cover", width: "100%", height: "auto" }}
+          style={{ 
+            objectFit: "cover", 
+            width: "100%", 
+            height: "auto",
+            borderRadius: "12px"
+          }}
           priority
         />
       </div>
 
       <div className={styles.statsContainer}>
         <div className={styles.statItem}>
-          <div className="stat-value">120</div>
-          <div className="stat-label">courses</div>
+          <div className="stat-value">120+</div>
+          <div className="stat-label">AI templates</div>
         </div>
         <div className={styles.statItem}>
           <div className="stat-value">285</div>
-          <div className="stat-label">happy users</div>
+          <div className="stat-label">educators</div>
         </div>
         <div className={styles.statItem}>
-          <div className="stat-value">24.7</div>
-          <div className="stat-label">hours</div>
+          <div className="stat-value">24/7</div>
+          <div className="stat-label">support</div>
         </div>
         <div className={styles.statItem}>
-          <div className="stat-value">10</div>
+          <div className="stat-value">10+</div>
           <div className="stat-label">countries</div>
         </div>
       </div>
