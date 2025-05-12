@@ -6,25 +6,25 @@ import AnimatedElement from "../../AnimatedElement";
 export default function TestimonialsSection() {
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Sarah Tamiru",
       role: "High School English Teacher",
-      image: "/teacher.png",
+      image: "/sarah-tamiru.png",
       content:
         "Teacherly has transformed the way I create and grade assignments. I'm saving at least 5 hours every week, which I can now spend giving students more personalized attention.",
     },
     {
-      name: "Michael Rodriguez",
-      role: "Middle School Science Teacher",
-      image: "/teacher.png",
+      name: "Milki Johannes",
+      role: "Geography Teacher",
+      image: "/milki-johannes.png",
       content:
         "The AI lesson plans are incredibly adaptive. I can easily customize them for different learning styles, and my students are more engaged than ever. The analytics help me identify who needs extra support before they fall behind.",
     },
     {
-      name: "Emily Chang",
-      role: "Elementary School Teacher",
-      image: "/teacher.png",
+      name: "Abebech Dinku",
+      role: "Art & Culture Teacher",
+      image: "/abebech-dinku.png",
       content:
-        "As a new teacher, Teacherly has been my secret weapon. The curriculum builder helped me design compelling lessons that meet all our district standards, and the grading tools make feedback consistent and meaningful.",
+        "Teacherly has been my secret weapon. The curriculum builder helped me design compelling lessons that meet all our district standards, and the grading tools make feedback consistent and meaningful.",
     },
   ];
 
