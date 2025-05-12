@@ -83,8 +83,8 @@ export default function NotFoundPage() {
         </AnimatedElement>
 
         <AnimatedElement animation="up" delay={0.2}>
-          <h1 className="text-5xl md:text-8xl font-bold mb-4 text-gradient-primary">
-            404
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gradient">
+            404: Page Not Found
           </h1>
         </AnimatedElement>
 
