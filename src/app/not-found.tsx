@@ -12,20 +12,20 @@ export default function NotFoundPage() {
   // Collection of teacher-themed 404 phrases
   const teacherPhrases = [
     "Oops! This page is playing hooky today.",
-    "This page must be in the teacher's lounge.",
+    "This page must be in the teacher&apos;s lounge.",
     "Looks like this page forgot to turn in its homework.",
-    "Class dismissed! This page doesn't exist.",
+    "Class dismissed! This page doesn&apos;t exist.",
     "Even the smartest teachers get lost sometimes.",
     "Pop quiz: Where did this page go?",
-    "This page has been sent to the principal's office.",
-    "The chalkboard's blank-this page is missing!",
+    "This page has been sent to the principal&apos;s office.",
+    "The chalkboard&apos;s blank-this page is missing!",
     "Oops! No detention can fix this missing page.",
     "This page is out for recess. Try again later!",
     "Looks like this page skipped class today.",
     "The bell rang, but this page never showed up.",
     "This page is still grading its papers-try again soon!",
     "This page took a field trip and got lost.",
-    "This page is hiding behind the teacher's desk.",
+    "This page is hiding behind the teacher&apos;s desk.",
     "This page is stuck in a pop quiz frenzy.",
     "Looks like this page is still in study hall.",
     "This page is on a coffee break with the staff.",
@@ -50,7 +50,7 @@ export default function NotFoundPage() {
         {['E=mc²', '2+2=4', 'x²+y²=r²', 'a²+b²=c²', 'F=ma', 'y=mx+b', 'πr²', '∫f(x)dx', 'sin(θ)'].map((formula, index) => (
           <div 
             key={index}
-            className="absolute text-white/5 text-2xl md:text-4xl font-bold"
+            className="absolute text-white text-2xl md:text-4xl font-bold"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
