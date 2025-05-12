@@ -44,9 +44,9 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="min-h-screen bg-card-bg flex flex-col">
-      {/* Header */}
-      <header className="h-16 border-b border-white/5 backdrop-blur-md bg-card-bg/80 fixed top-0 left-0 right-0 z-50 flex items-center px-4 md:px-6">
+    <div className="min-h-screen bg-card-bg flex flex-col overflow-x-hidden w-full">
+      {/* Header - improved backdrop filter and z-index */}
+      <header className="h-16 border-b border-white/5 bg-card-bg/70 backdrop-blur-xl fixed top-0 left-0 right-0 z-50 flex items-center px-4 md:px-6">
         <div className="flex justify-between items-center w-full">
           <div className="flex items-center gap-3">
             <button 
@@ -70,7 +70,7 @@ export default function DashboardLayout({
                   className="object-contain transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
-              <span className="text-gradient text-xl font-bold relative">
+              <span className="text-gradient-primary text-xl font-bold relative">
                 Teacherly
                 <span className="absolute bottom-[-3px] left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full"
                       style={{ background: "var(--gradient-accent)" }}></span>
@@ -94,10 +94,10 @@ export default function DashboardLayout({
         </div>
       </header>
 
-      <div className="flex flex-1 pt-16"> {/* Added pt-16 to account for fixed header height */}
-        {/* Sidebar - fixed position */}
+      <div className="flex flex-1 pt-16 w-full"> {/* Added w-full to prevent horizontal overflow */}
+        {/* Sidebar - improved backdrop and z-index */}
         <aside 
-          className={`bg-black/20 backdrop-blur-md border-r border-white/5 h-[calc(100vh-64px)] fixed top-16 left-0 overflow-y-auto transition-all duration-300 flex flex-col
+          className={`bg-black/50 backdrop-blur-xl border-r border-white/5 h-[calc(100vh-64px)] fixed top-16 left-0 overflow-y-auto transition-all duration-300 flex flex-col z-40
                      ${isSidebarCollapsed ? 'w-[70px]' : 'w-[250px]'}`}
         >
           <div className="flex-1 py-4">
@@ -258,9 +258,20 @@ export default function DashboardLayout({
           </div>
         </aside>
 
-        {/* Main content - with left margin to accommodate sidebar */}
-        <main className={`flex-1 transition-all duration-300 ml-[70px] ${isSidebarCollapsed ? 'ml-[70px]' : 'ml-[250px]'}`}>
-          {children}
+        {/* Mobile overlay for sidebar */}
+        {!isSidebarCollapsed && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-30 md:hidden"
+            onClick={toggleSidebar}
+            aria-label="Close sidebar"
+          ></div>
+        )}
+
+        {/* Main content */}
+        <main className={`flex-1 transition-all duration-300 w-full ${isSidebarCollapsed ? 'ml-[70px]' : 'ml-[250px]'}`}>
+          <div className="w-full max-w-full overflow-x-hidden">
+            {children}
+          </div>
         </main>
       </div>
     </div>
