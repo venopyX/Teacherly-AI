@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from 'next/link';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +41,7 @@ export default function Header() {
       <div className="container-custom flex justify-between items-center">
         {/* Logo with icon */}
         <div className="relative group z-10">
-          <a href="/" className="flex items-center gap-2 transition-all duration-300">
+          <Link href="/" className="flex items-center gap-2 transition-all duration-300">
             <div className="relative w-8 h-8 md:w-9 md:h-9">
               <Image
                 src="/logo.svg"
@@ -57,7 +58,7 @@ export default function Header() {
               <span className="absolute bottom-[-5px] left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full"
                     style={{background: "var(--gradient-accent)"}}></span>
             </span>
-          </a>
+          </Link>
           <div className="absolute -inset-1 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300"
                style={{background: "var(--gradient-glass)"}}></div>
         </div>
@@ -67,7 +68,7 @@ export default function Header() {
           <ul className="flex gap-8">
             {["Home", "Services", "Features", "Testimonials", "Pricing"].map((item, index) => (
               <li key={index}>
-                <a
+                <Link
                   href={`#${item.toLowerCase()}`}
                   className="relative transition-all duration-300 group"
                   style={{
@@ -81,7 +82,7 @@ export default function Header() {
                         style={{background: "var(--gradient-accent)"}}></span>
                   <span className="absolute -inset-x-2 -inset-y-1 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300"
                         style={{background: "var(--gradient-glass)"}}></span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -89,7 +90,7 @@ export default function Header() {
 
         {/* Auth buttons */}
         <div className="flex items-center gap-4 z-10">
-          <a
+          <Link
             href="/auth?mode=login"
             className="hidden sm:inline-block relative group transition-all duration-300"
             style={{
@@ -100,8 +101,8 @@ export default function Header() {
             Sign in
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full"
                   style={{backgroundColor: "var(--text-muted)"}}></span>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/auth?mode=signup"
             className="btn btn-primary relative py-2 px-4 text-sm"
           >
@@ -110,7 +111,7 @@ export default function Header() {
                   style={{background: "var(--gradient-accent)"}}></span>
             <span className="absolute -inset-1 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300"
                   style={{background: "var(--gradient-glass)"}}></span>
-          </a>
+          </Link>
         </div>
 
         {/* Mobile menu button */}
@@ -177,7 +178,7 @@ export default function Header() {
             {["Home", "Services", "Features", "Testimonials", "Pricing", "Sign in"].map(
               (item, index) => (
                 <li key={index}>
-                  <a
+                  <Link
                     href={
                       item === "Sign in"
                         ? "/auth?mode=login"
@@ -194,12 +195,12 @@ export default function Header() {
                     {item}
                     <span className="block w-0 h-[1px] transition-all duration-300 group-hover:w-1/2 mt-1"
                           style={{background: "var(--gradient-accent)"}}></span>
-                  </a>
+                  </Link>
                 </li>
               )
             )}
             <li>
-              <a
+              <Link
                 href="/auth?mode=signup"
                 onClick={() => setMobileMenuOpen(false)}
                 className="btn btn-primary block text-center mt-4 relative group overflow-hidden"
@@ -207,7 +208,7 @@ export default function Header() {
                 <span className="relative z-10">Start Free</span>
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{background: "var(--gradient-accent)"}}></span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

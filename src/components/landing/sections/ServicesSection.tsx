@@ -1,6 +1,7 @@
 import React from "react";
 import AnimatedSection from "../../AnimatedSection";
 import AnimatedElement from "../../AnimatedElement";
+import Link from "next/link";
 
 export default function ServicesSection() {
   const services = [
@@ -191,7 +192,7 @@ export default function ServicesSection() {
 
             {/* CTA Button */}
             <AnimatedElement animation="up" delay={0.6} className="flex justify-center mt-16">
-              <a href="/features" className="btn btn-accent group">
+              <Link href="/features" className="btn btn-accent group">
                 <span className="relative z-10">Explore All Features</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +209,7 @@ export default function ServicesSection() {
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
-              </a>
+              </Link>
             </AnimatedElement>
             
             {/* Stats cards */}

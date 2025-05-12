@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 
 interface ScrollDownButtonProps {
@@ -42,7 +43,7 @@ const ScrollDownButton: React.FC<ScrollDownButtonProps> = ({ targetId }) => {
   };
 
   return (
-    <a
+    <Link
       href={`#${targetId}`}
       className="flex flex-col items-center gap-2 text-text-secondary hover:text-primary transition-colors duration-300 animate-pulse"
       onClick={handleClick}
@@ -63,7 +64,7 @@ const ScrollDownButton: React.FC<ScrollDownButtonProps> = ({ targetId }) => {
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
       </div>
-    </a>
+    </Link>
   );
 };
 

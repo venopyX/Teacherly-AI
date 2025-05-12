@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import AnimatedSection from "../../AnimatedSection";
 import AnimatedElement from "../../AnimatedElement";
+import Link from "next/link";
 
 export default function TestimonialsSection() {
   const testimonials = [
@@ -151,7 +152,7 @@ export default function TestimonialsSection() {
         {/* Call to action button */}
         <AnimatedElement animation="up" delay={0.6}>
           <div className="text-center mt-16">
-            <a href="/case-studies" className="btn btn-primary group relative overflow-hidden">
+            <Link href="/case-studies" className="btn btn-primary group relative overflow-hidden">
               <span className="relative z-10 flex items-center gap-2">
                 Read Success Stories
                 <svg 
@@ -172,7 +173,7 @@ export default function TestimonialsSection() {
               </span>
               <span className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-300"
                     style={{background: "var(--gradient-accent)"}}></span>
-            </a>
+            </Link>
           </div>
         </AnimatedElement>
         

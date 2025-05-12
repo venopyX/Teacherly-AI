@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import ScrollDownButton from "../../ScrollDownButton";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -63,7 +64,7 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-wrap gap-4 mt-4">
-            <a href="/auth?mode=signup" className="relative group">
+            <Link href="/auth?mode=signup" className="relative group">
               <span className="absolute -inset-0.5 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-300 animate-pulse"
                     style={{background: "var(--gradient-accent)"}}></span>
               <button className="btn btn-primary relative">
@@ -84,9 +85,9 @@ export default function HeroSection() {
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
               </button>
-            </a>
+            </Link>
 
-            <a href="/about" className="relative group">
+            <Link href="/about" className="relative group">
               <span className="absolute -inset-0.5 rounded-lg blur opacity-0 group-hover:opacity-30 transition duration-300"
                     style={{background: "var(--gradient-primary)"}}></span>
               <button className="relative py-3 px-6 rounded-lg font-semibold transition-all duration-300 group-hover:-translate-y-1 group-hover:text-white group-hover:shadow-md"
@@ -97,7 +98,7 @@ export default function HeroSection() {
                       }}>
                 Learn More
               </button>
-            </a>
+            </Link>
           </div>
         </div>
 
