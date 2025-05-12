@@ -57,9 +57,9 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 w-full transition-all duration-300 z-[1000]"
+      className="fixed top-0 left-0 right-0 w-full transition-all duration-300 z-[1000]"
       style={{ 
-        padding: isScrolled ? "0.75rem 2rem" : "1.5rem 2rem", 
+        padding: isScrolled ? "0.75rem 1rem" : "1.5rem 1rem", 
         backgroundColor: isScrolled ? "rgba(15, 15, 24, 0.95)" : "transparent",
         backdropFilter: isScrolled ? "blur(12px)" : "blur(4px)",
         borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
