@@ -236,7 +236,7 @@ export default function PricingSection() {
               <div className="mb-6 md:mb-0 text-center md:text-left">
                 <h3 className="heading-sm mb-2">Need a custom solution?</h3>
                 <p className="body-md max-w-lg" style={{ color: 'var(--text-secondary)' }}>
-                  Contact our team for a tailored plan that fits your institution's specific requirements.
+                  Contact our team for a tailored plan that fits your institution&apos;s specific requirements.
                 </p>
               </div>
               <button className="btn relative group overflow-hidden whitespace-nowrap">
