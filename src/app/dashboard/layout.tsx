@@ -70,7 +70,7 @@ export default function DashboardLayout({
                   className="object-contain transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
-              <span className="text-gradient-primary text-xl font-bold relative">
+              <span className="text-gradient text-xl font-bold relative">
                 Teacherly
                 <span className="absolute bottom-[-3px] left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full"
                       style={{ background: "var(--gradient-accent)" }}></span>

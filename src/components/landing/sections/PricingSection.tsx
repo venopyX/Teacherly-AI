@@ -64,7 +64,7 @@ export default function PricingSection() {
     {
       name: "Starter",
       description: "Perfect for individual teachers",
-      price: isAnnual ? 15 : 19,
+      price: isAnnual ? 1500 : 1900,
       features: [
         "50 AI-powered lesson plans",
         "Basic analytics",
@@ -79,7 +79,7 @@ export default function PricingSection() {
     {
       name: "Professional",
       description: "Designed for growing educators",
-      price: isAnnual ? 39 : 49,
+      price: isAnnual ? 3900 : 4900,
       features: [
         "Unlimited AI-powered lesson plans",
         "Advanced analytics & insights",
@@ -96,7 +96,7 @@ export default function PricingSection() {
     {
       name: "Enterprise",
       description: "For schools and institutions",
-      price: isAnnual ? 79 : 99,
+      price: isAnnual ? 7900 : 9900,
       features: [
         "Everything in Professional",
         "Dedicated account manager",
@@ -175,7 +175,7 @@ export default function PricingSection() {
                   {/* Price */}
                   <div className="mb-8">
                     <div className="flex items-end">
-                      <span className="text-4xl font-bold" style={{ color: 'var(--text-color)' }}>${plan.price}</span>
+                      <span className="text-4xl font-bold" style={{ color: 'var(--text-color)' }}>{plan.price}ETB</span>
                       <span className="ml-2 mb-1" style={{ color: 'var(--text-muted)' }}>/ {isAnnual ? 'year' : 'month'}</span>
                     </div>
                     {isAnnual && (
