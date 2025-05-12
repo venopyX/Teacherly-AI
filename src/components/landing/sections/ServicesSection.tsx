@@ -1,5 +1,4 @@
 import React from "react";
-import AnimatedSection from "../../AnimatedSection";
 import AnimatedElement from "../../AnimatedElement";
 import Link from "next/link";
 
