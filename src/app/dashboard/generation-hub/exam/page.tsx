@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import AnimatedElement from '@/components/AnimatedElement';
 
@@ -16,13 +16,55 @@ export default function ExamGeneration() {
     additionalInfo: '',
   });
 
+  // Custom dropdowns state
+  const [examTypeOpen, setExamTypeOpen] = useState(false);
+  const [difficultyOpen, setDifficultyOpen] = useState(false);
+  const examTypeRef = useRef<HTMLDivElement>(null);
+  const difficultyRef = useRef<HTMLDivElement>(null);
+
+  const examTypeOptions = [
+    { value: 'quiz', label: 'Quiz' },
+    { value: 'midterm', label: 'Mid Exam' },
+    { value: 'final', label: 'Final Exam' }
+  ];
+
+  const difficultyOptions = [
+    { value: 'easy', label: 'Easy' },
+    { value: 'medium', label: 'Medium' },
+    { value: 'hard', label: 'Hard' }
+  ];
+  
   useEffect(() => {
     setIsLoaded(true);
+    
+    // Close dropdowns when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      if (examTypeRef.current && !examTypeRef.current.contains(event.target as Node)) {
+        setExamTypeOpen(false);
+      }
+      if (difficultyRef.current && !difficultyRef.current.contains(event.target as Node)) {
+        setDifficultyOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleDropdownChange = (name: string, value: string) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === 'examType') {
+      setExamTypeOpen(false);
+    } else if (name === 'difficulty') {
+      setDifficultyOpen(false);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,6 +73,15 @@ export default function ExamGeneration() {
     console.log('Form submitted:', formData);
     // For demo purposes, we'll just show an alert
     alert('Exam generation request submitted!');
+  };
+
+  // Get current selected label
+  const getCurrentExamTypeLabel = () => {
+    return examTypeOptions.find(option => option.value === formData.examType)?.label || 'Quiz';
+  };
+  
+  const getCurrentDifficultyLabel = () => {
+    return difficultyOptions.find(option => option.value === formData.difficulty)?.label || 'Medium';
   };
 
   return (
@@ -120,53 +171,105 @@ export default function ExamGeneration() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* Exam Type */}
-                  <div>
-                    <label htmlFor="examType" className="block text-sm font-medium mb-2">Exam Type</label>
+                  {/* Custom Exam Type Dropdown */}
+                  <div ref={examTypeRef}>
+                    <label className="block text-sm font-medium mb-2">Exam Type</label>
                     <div className="relative">
-                      <select
-                        id="examType"
-                        name="examType"
-                        value={formData.examType}
-                        onChange={handleChange}
-                        className="w-full glassmorphism py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 appearance-none cursor-pointer"
-                        style={{ color: "var(--text-color)", backgroundColor: "rgba(255, 255, 255, 0.05)" }}
-                        required
+                      <div 
+                        className="w-full glassmorphism py-3 px-4 rounded-lg flex justify-between items-center cursor-pointer hover:bg-white/10 transition-colors"
+                        onClick={() => setExamTypeOpen(!examTypeOpen)}
                       >
-                        <option value="quiz">Quiz</option>
-                        <option value="midterm">Mid Exam</option>
-                        <option value="final">Final Exam</option>
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <span>{getCurrentExamTypeLabel()}</span>
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="16" 
+                          height="16" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                          className={`transition-transform duration-300 ${examTypeOpen ? 'rotate-180' : ''}`}
+                        >
                           <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                       </div>
+                      
+                      {/* Dropdown menu */}
+                      {examTypeOpen && (
+                        <div 
+                          className="absolute top-full left-0 right-0 mt-1 glassmorphism rounded-lg py-1 z-10"
+                        >
+                          {examTypeOptions.map((option) => (
+                            <div 
+                              key={option.value}
+                              className="py-2 px-4 hover:bg-white/10 cursor-pointer transition-colors"
+                              onClick={() => handleDropdownChange('examType', option.value)}
+                            >
+                              {option.label}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Hidden input for form submission */}
+                      <input 
+                        type="hidden" 
+                        name="examType" 
+                        value={formData.examType} 
+                      />
                     </div>
                   </div>
 
-                  {/* Difficulty Level */}
-                  <div>
-                    <label htmlFor="difficulty" className="block text-sm font-medium mb-2">Difficulty Level</label>
+                  {/* Custom Difficulty Dropdown */}
+                  <div ref={difficultyRef}>
+                    <label className="block text-sm font-medium mb-2">Difficulty Level</label>
                     <div className="relative">
-                      <select
-                        id="difficulty"
-                        name="difficulty"
-                        value={formData.difficulty}
-                        onChange={handleChange}
-                        className="w-full glassmorphism py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 appearance-none cursor-pointer"
-                        style={{ color: "var(--text-color)", backgroundColor: "rgba(255, 255, 255, 0.05)" }}
-                        required
+                      <div 
+                        className="w-full glassmorphism py-3 px-4 rounded-lg flex justify-between items-center cursor-pointer hover:bg-white/10 transition-colors"
+                        onClick={() => setDifficultyOpen(!difficultyOpen)}
                       >
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <span>{getCurrentDifficultyLabel()}</span>
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          width="16" 
+                          height="16" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                          className={`transition-transform duration-300 ${difficultyOpen ? 'rotate-180' : ''}`}
+                        >
                           <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                       </div>
+                      
+                      {/* Dropdown menu */}
+                      {difficultyOpen && (
+                        <div 
+                          className="absolute top-full left-0 right-0 mt-1 glassmorphism rounded-lg py-1 z-10"
+                        >
+                          {difficultyOptions.map((option) => (
+                            <div 
+                              key={option.value}
+                              className="py-2 px-4 hover:bg-white/10 cursor-pointer transition-colors"
+                              onClick={() => handleDropdownChange('difficulty', option.value)}
+                            >
+                              {option.label}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Hidden input for form submission */}
+                      <input 
+                        type="hidden" 
+                        name="difficulty" 
+                        value={formData.difficulty} 
+                      />
                     </div>
                   </div>
 
@@ -275,7 +378,7 @@ export default function ExamGeneration() {
           </div>
         </AnimatedElement>
 
-        {/* Exam tips section - redesigned without the rectangle */}
+        {/* Exam tips section */}
         <AnimatedElement animation="up" delay={0.3}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Exam Types */}
