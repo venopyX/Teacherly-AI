@@ -7,7 +7,7 @@ import PricingSection from "@/components/landing/sections/PricingSection";
 
 export default function Home() {
   return (
-    <main className="flex flex-col w-full m-0 p-0">
+    <main className="flex flex-col w-full max-w-full overflow-hidden m-0 p-0">
       {/* Header positioned outside the glassmorphism container to ensure stickiness works properly */}
       <Header />
       

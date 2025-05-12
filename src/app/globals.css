@@ -98,6 +98,15 @@
   --z-tooltip: 1500;
 }
 
+/* FIX: Prevent horizontal overflow */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -112,7 +121,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
   transition: background-color 0.3s ease;
 }
 
@@ -506,4 +514,18 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+}
+
+/* FIX: Scrollbar thin utility class */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 2px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: var(--background-tertiary);
 }
