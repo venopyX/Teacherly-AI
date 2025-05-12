@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,12 +38,25 @@ export default function Header() {
       </div>
 
       <div className="container-custom flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo with icon */}
         <div className="relative group z-10">
-          <a href="/" className="text-gradient-primary text-2xl font-bold relative transition-all duration-300">
-            Teacherly
-            <span className="absolute bottom-[-5px] left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full"
-                  style={{background: "var(--gradient-accent)"}}></span>
+          <a href="/" className="flex items-center gap-2 transition-all duration-300">
+            <div className="relative w-8 h-8 md:w-9 md:h-9">
+              <Image
+                src="/logo.svg"
+                alt="Teacherly Logo"
+                width={36}
+                height={36}
+                className="object-contain transition-transform duration-300 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 rounded-full blur-md opacity-0 group-hover:opacity-70 transition duration-300"
+                   style={{background: "var(--gradient-primary)"}}></div>
+            </div>
+            <span className="text-gradient text-2xl font-bold relative">
+              Teacherly
+              <span className="absolute bottom-[-5px] left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full"
+                    style={{background: "var(--gradient-accent)"}}></span>
+            </span>
           </a>
           <div className="absolute -inset-1 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-300"
                style={{background: "var(--gradient-glass)"}}></div>
@@ -144,6 +158,20 @@ export default function Header() {
           {/* Mobile menu background effects */}
           <div className="glow-effect glow-primary w-32 h-32 top-0 right-0"></div>
           <div className="glow-effect glow-accent w-32 h-32 bottom-0 left-0"></div>
+
+          {/* Mobile menu logo */}
+          <div className="flex items-center gap-2 mb-8">
+            <div className="relative w-7 h-7">
+              <Image
+                src="/logo.svg"
+                alt="Teacherly Logo"
+                width={28}
+                height={28}
+                className="object-contain"
+              />
+            </div>
+            <span className="text-gradient text-xl font-bold">Teacherly</span>
+          </div>
 
           <ul className="flex flex-col gap-6 p-0 relative z-10">
             {["Home", "Services", "Features", "Testimonials", "Pricing", "Sign in"].map(
