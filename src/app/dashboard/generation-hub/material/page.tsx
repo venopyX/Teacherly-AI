@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AnimatedElement from '@/components/AnimatedElement';
+import CustomDropdown from '@/components/CustomDropdown';
 
 export default function MaterialGeneration() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -14,12 +15,24 @@ export default function MaterialGeneration() {
     additionalInfo: '',
   });
 
+  const contentTypeOptions = [
+    { value: 'lesson', label: 'Lesson Plan' },
+    { value: 'worksheet', label: 'Worksheet' },
+    { value: 'presentation', label: 'Presentation Slides' },
+    { value: 'activity', label: 'Classroom Activity' },
+    { value: 'homework', label: 'Homework Assignment' }
+  ];
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleDropdownChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
@@ -117,31 +130,15 @@ export default function MaterialGeneration() {
                   />
                 </div>
 
-                {/* Content Type */}
+                {/* Content Type Dropdown */}
                 <div>
-                  <label htmlFor="contentType" className="block text-sm font-medium mb-2">Content Type</label>
-                  <div className="relative">
-                    <select
-                      id="contentType"
-                      name="contentType"
-                      value={formData.contentType}
-                      onChange={handleChange}
-                      className="w-full glassmorphism py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 appearance-none"
-                      style={{ color: "var(--text-color)" }}
-                      required
-                    >
-                      <option value="lesson">Lesson Plan</option>
-                      <option value="worksheet">Worksheet</option>
-                      <option value="presentation">Presentation Slides</option>
-                      <option value="activity">Classroom Activity</option>
-                      <option value="homework">Homework Assignment</option>
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </div>
-                  </div>
+                  <CustomDropdown
+                    options={contentTypeOptions}
+                    value={formData.contentType}
+                    onChange={(value) => handleDropdownChange('contentType', value)}
+                    label="Content Type"
+                    name="contentType"
+                  />
                 </div>
 
                 {/* Additional Information */}

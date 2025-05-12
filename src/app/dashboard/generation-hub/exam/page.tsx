@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AnimatedElement from '@/components/AnimatedElement';
+import CustomDropdown from '@/components/CustomDropdown';
 
 export default function ExamGeneration() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -15,12 +16,6 @@ export default function ExamGeneration() {
     questionCount: '10',
     additionalInfo: '',
   });
-
-  // Custom dropdowns state
-  const [examTypeOpen, setExamTypeOpen] = useState(false);
-  const [difficultyOpen, setDifficultyOpen] = useState(false);
-  const examTypeRef = useRef<HTMLDivElement>(null);
-  const difficultyRef = useRef<HTMLDivElement>(null);
 
   const examTypeOptions = [
     { value: 'quiz', label: 'Quiz' },
@@ -36,21 +31,6 @@ export default function ExamGeneration() {
   
   useEffect(() => {
     setIsLoaded(true);
-    
-    // Close dropdowns when clicking outside
-    const handleClickOutside = (event: MouseEvent) => {
-      if (examTypeRef.current && !examTypeRef.current.contains(event.target as Node)) {
-        setExamTypeOpen(false);
-      }
-      if (difficultyRef.current && !difficultyRef.current.contains(event.target as Node)) {
-        setDifficultyOpen(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -60,11 +40,6 @@ export default function ExamGeneration() {
   
   const handleDropdownChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
-    if (name === 'examType') {
-      setExamTypeOpen(false);
-    } else if (name === 'difficulty') {
-      setDifficultyOpen(false);
-    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -73,15 +48,6 @@ export default function ExamGeneration() {
     console.log('Form submitted:', formData);
     // For demo purposes, we'll just show an alert
     alert('Exam generation request submitted!');
-  };
-
-  // Get current selected label
-  const getCurrentExamTypeLabel = () => {
-    return examTypeOptions.find(option => option.value === formData.examType)?.label || 'Quiz';
-  };
-  
-  const getCurrentDifficultyLabel = () => {
-    return difficultyOptions.find(option => option.value === formData.difficulty)?.label || 'Medium';
   };
 
   return (
@@ -172,106 +138,22 @@ export default function ExamGeneration() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Custom Exam Type Dropdown */}
-                  <div ref={examTypeRef}>
-                    <label className="block text-sm font-medium mb-2">Exam Type</label>
-                    <div className="relative">
-                      <div 
-                        className="w-full glassmorphism py-3 px-4 rounded-lg flex justify-between items-center cursor-pointer hover:bg-white/10 transition-colors"
-                        onClick={() => setExamTypeOpen(!examTypeOpen)}
-                      >
-                        <span>{getCurrentExamTypeLabel()}</span>
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          width="16" 
-                          height="16" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="2" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round"
-                          className={`transition-transform duration-300 ${examTypeOpen ? 'rotate-180' : ''}`}
-                        >
-                          <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                      </div>
-                      
-                      {/* Dropdown menu */}
-                      {examTypeOpen && (
-                        <div 
-                          className="absolute top-full left-0 right-0 mt-1 glassmorphism rounded-lg py-1 z-10"
-                        >
-                          {examTypeOptions.map((option) => (
-                            <div 
-                              key={option.value}
-                              className="py-2 px-4 hover:bg-white/10 cursor-pointer transition-colors"
-                              onClick={() => handleDropdownChange('examType', option.value)}
-                            >
-                              {option.label}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      
-                      {/* Hidden input for form submission */}
-                      <input 
-                        type="hidden" 
-                        name="examType" 
-                        value={formData.examType} 
-                      />
-                    </div>
-                  </div>
+                  <CustomDropdown
+                    options={examTypeOptions}
+                    value={formData.examType}
+                    onChange={(value) => handleDropdownChange('examType', value)}
+                    label="Exam Type"
+                    name="examType"
+                  />
 
                   {/* Custom Difficulty Dropdown */}
-                  <div ref={difficultyRef}>
-                    <label className="block text-sm font-medium mb-2">Difficulty Level</label>
-                    <div className="relative">
-                      <div 
-                        className="w-full glassmorphism py-3 px-4 rounded-lg flex justify-between items-center cursor-pointer hover:bg-white/10 transition-colors"
-                        onClick={() => setDifficultyOpen(!difficultyOpen)}
-                      >
-                        <span>{getCurrentDifficultyLabel()}</span>
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          width="16" 
-                          height="16" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="2" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round"
-                          className={`transition-transform duration-300 ${difficultyOpen ? 'rotate-180' : ''}`}
-                        >
-                          <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                      </div>
-                      
-                      {/* Dropdown menu */}
-                      {difficultyOpen && (
-                        <div 
-                          className="absolute top-full left-0 right-0 mt-1 glassmorphism rounded-lg py-1 z-10"
-                        >
-                          {difficultyOptions.map((option) => (
-                            <div 
-                              key={option.value}
-                              className="py-2 px-4 hover:bg-white/10 cursor-pointer transition-colors"
-                              onClick={() => handleDropdownChange('difficulty', option.value)}
-                            >
-                              {option.label}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      
-                      {/* Hidden input for form submission */}
-                      <input 
-                        type="hidden" 
-                        name="difficulty" 
-                        value={formData.difficulty} 
-                      />
-                    </div>
-                  </div>
+                  <CustomDropdown
+                    options={difficultyOptions}
+                    value={formData.difficulty}
+                    onChange={(value) => handleDropdownChange('difficulty', value)}
+                    label="Difficulty Level"
+                    name="difficulty"
+                  />
 
                   {/* Number of Questions */}
                   <div>
