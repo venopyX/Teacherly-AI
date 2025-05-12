@@ -92,7 +92,7 @@ export default function NotFoundPage() {
           <div className="glassmorphism rounded-xl p-6 mb-8 max-w-xl mx-auto">
             <h2 className="text-xl md:text-2xl font-medium mb-3">{randomPhrase}</h2>
             <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
-              The page you're looking for has mysteriously vanished, like homework on a Monday morning.
+              The page you&apos;re looking for has mysteriously vanished, like homework on a Monday morning.
             </p>
             
             <div className="w-full h-[1px] bg-white/10 mb-6"></div>
