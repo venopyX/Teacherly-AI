@@ -6,6 +6,8 @@ import Link from 'next/link';
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const headerRef = React.useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,8 +21,42 @@ export default function Header() {
     };
   }, []);
 
+  // Update header height on mount and whenever it changes
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
+    };
+
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    
+    // Also update when scroll state changes, as this can affect header size
+    if (isScrolled !== undefined) {
+      updateHeaderHeight();
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateHeaderHeight);
+    };
+  }, [isScrolled]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header
+      ref={headerRef}
       className="sticky top-0 w-full transition-all duration-300 z-[1000]"
       style={{ 
         padding: isScrolled ? "0.75rem 2rem" : "1.5rem 2rem", 
@@ -147,70 +183,83 @@ export default function Header() {
                 style={{backgroundColor: "var(--primary)", opacity: "0.2"}}></span>
         </button>
 
-        {/* Mobile menu */}
+        {/* Mobile menu - Updated for scrollability and no gap with header */}
         <div
-          className={`fixed top-[70px] right-0 w-4/5 max-w-[300px] h-[calc(100vh-70px)] z-40 transition-all duration-300 p-8 overflow-y-auto glassmorphism ${
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed top-0 right-0 w-4/5 max-w-[300px] h-screen z-40 transition-all duration-300 flex flex-col ${
+            mobileMenuOpen ? "translate-x-0 opacity-100 visible" : "translate-x-full opacity-0 invisible"
           }`}
           style={{
-            boxShadow: "var(--shadow-lg)"
+            boxShadow: "var(--shadow-lg)",
+            backgroundColor: "rgba(15, 15, 24, 0.92)",
+            backdropFilter: "blur(16px)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.06)",
           }}
         >
-          {/* Mobile menu background effects */}
-          <div className="glow-effect glow-primary w-32 h-32 top-0 right-0"></div>
-          <div className="glow-effect glow-accent w-32 h-32 bottom-0 left-0"></div>
+          {/* Spacer that matches header height exactly */}
+          <div style={{ height: `${headerHeight}px` }} className="transition-all duration-300"></div>
+          
+          {/* Scrollable content area */}
+          <div className="flex-grow overflow-y-auto p-8 relative scrollbar-thin">
+            {/* Mobile menu background effects */}
+            <div className="absolute inset-0 bg-background-secondary bg-opacity-80 -z-10"></div>
+            <div className="glow-effect glow-primary w-32 h-32 top-0 right-0 opacity-20"></div>
+            <div className="glow-effect glow-accent w-32 h-32 bottom-0 left-0 opacity-20"></div>
 
-          {/* Mobile menu logo */}
-          <div className="flex items-center gap-2 mb-8">
-            <div className="relative w-7 h-7">
-              <Image
-                src="/logo.svg"
-                alt="Teacherly Logo"
-                width={28}
-                height={28}
-                className="object-contain"
-              />
+            {/* Mobile menu logo */}
+            <div className="flex items-center gap-2 mb-8">
+              <div className="relative w-7 h-7">
+                <Image
+                  src="/logo.svg"
+                  alt="Teacherly Logo"
+                  width={28}
+                  height={28}
+                  className="object-contain"
+                />
+              </div>
+              <span className="text-gradient text-xl font-bold">Teacherly</span>
             </div>
-            <span className="text-gradient text-xl font-bold">Teacherly</span>
-          </div>
 
-          <ul className="flex flex-col gap-6 p-0 relative z-10">
-            {["Home", "Services", "Features", "Testimonials", "Pricing", "Sign in"].map(
-              (item, index) => (
-                <li key={index}>
-                  <Link
-                    href={
-                      item === "Sign in"
-                        ? "/auth?mode=login"
-                        : `#${item.toLowerCase()}`
-                    }
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block transition-all duration-300 group hover:translate-x-2"
-                    style={{
-                      color: "var(--text-color)",
-                      fontSize: "1.125rem",
-                      fontWeight: "600"
-                    }}
-                  >
-                    {item}
-                    <span className="block w-0 h-[1px] transition-all duration-300 group-hover:w-1/2 mt-1"
-                          style={{background: "var(--gradient-accent)"}}></span>
-                  </Link>
-                </li>
-              )
-            )}
-            <li>
-              <Link
-                href="/auth?mode=signup"
-                onClick={() => setMobileMenuOpen(false)}
-                className="btn btn-primary block text-center mt-4 relative group overflow-hidden"
-              >
-                <span className="relative z-10">Start Free</span>
-                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{background: "var(--gradient-accent)"}}></span>
-              </Link>
-            </li>
-          </ul>
+            <ul className="flex flex-col gap-6 p-0 relative z-10">
+              {["Home", "Services", "Features", "Testimonials", "Pricing", "Sign in"].map(
+                (item, index) => (
+                  <li key={index}>
+                    <Link
+                      href={
+                        item === "Sign in"
+                          ? "/auth?mode=login"
+                          : `#${item.toLowerCase()}`
+                      }
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block transition-all duration-300 group hover:translate-x-2"
+                      style={{
+                        color: "var(--text-color)",
+                        fontSize: "1.125rem",
+                        fontWeight: "600"
+                      }}
+                    >
+                      {item}
+                      <span className="block w-0 h-[1px] transition-all duration-300 group-hover:w-1/2 mt-1"
+                            style={{background: "var(--gradient-accent)"}}></span>
+                    </Link>
+                  </li>
+                )
+              )}
+              <li>
+                <Link
+                  href="/auth?mode=signup"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn btn-primary block text-center mt-4 relative group overflow-hidden"
+                >
+                  <span className="relative z-10">Start Free</span>
+                  <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{background: "var(--gradient-accent)"}}></span>
+                </Link>
+              </li>
+            </ul>
+            
+            {/* Add enough padding at the bottom for better scrolling experience */}
+            <div className="h-16"></div>
+          </div>
         </div>
       </div>
     </header>
